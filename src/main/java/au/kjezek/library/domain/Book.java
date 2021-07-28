@@ -1,32 +1,29 @@
 package au.kjezek.library.domain;
 
-import org.springframework.data.annotation.PersistenceConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Getter
+@Setter
+@ToString
 @Document
 public class Book {
 
+    @Id
     private String id;
     @Indexed
     private String name;
+
     private Author author;
 
-    @PersistenceConstructor
-    public Book(String name, Author author) {
+    public Book(String id, String name, Author author) {
+        this.id = id;
         this.name = name;
         this.author = author;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
 }
