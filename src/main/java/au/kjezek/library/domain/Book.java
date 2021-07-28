@@ -7,6 +7,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * A book from a library.
+ */
 @Getter
 @Setter
 @ToString
@@ -17,7 +20,6 @@ public class Book {
     private String id;
     @Indexed
     private String name;
-
     private Author author;
 
     public Book(String id, String name, Author author) {

@@ -94,4 +94,32 @@ public class LibraryRestApi {
         return resultPage;
     }
 
+    @Operation(summary = "Paginated list with books by name",
+            description = "Input is a pagination query and the name of a book. The list of books in the page is returned",
+            tags = { "contact" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successfully created or updated",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Book.class)))) })
+    @GetMapping("/pages/book/name/{name}")
+    public Page<Book> findPaginatedBookName(@PathVariable final String name, final Pageable pageable) {
+        logger.debug("Start: GET book name {}, pages {}", name, pageable);
+        Page<Book> resultPage = repository.findByName(name, pageable);
+        logger.debug("End: GET book name {}, pages {}, elements: {}", name, pageable, resultPage.getTotalElements());
+        return resultPage;
+    }
+
+    @Operation(summary = "Paginated list with books by author",
+            description = "Input is a pagination query and the author. The list of books in the page is returned",
+            tags = { "contact" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successfully created or updated",
+                    content = @Content(array = @ArraySchema(schema = @Schema(implementation = Book.class)))) })
+    @GetMapping("/pages/author/name/{name}/surename/{surename}")
+    public Page<Book> findPaginatedAuthorName(@PathVariable final String name, @PathVariable final String surename, final Pageable pageable) {
+        logger.debug("Start: GET book name {}, surename {}, pages {}", name, surename, pageable);
+        Page<Book> resultPage = repository.findByAuthor(name, surename, pageable);
+        logger.debug("End: GET book name {}, surename {}, pages {}, elements: {}", name, surename, pageable, resultPage.getTotalElements());
+        return resultPage;
+    }
+
 }

@@ -6,6 +6,9 @@ import lombok.ToString;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * Author of a book.
+ */
 @Getter
 @Setter
 @ToString
@@ -14,7 +17,6 @@ public class Author {
 
     @Indexed
     private String name;
-
     @Indexed
     private String surename;
 
