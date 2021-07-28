@@ -18,8 +18,7 @@ import java.util.Optional;
 /**
  * Rest interface for the Library
  */
-@Controller
-@RequestMapping("/book/")
+@RestController("/book/")
 public class LibraryRestApi {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -58,13 +57,12 @@ public class LibraryRestApi {
         return book.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/pages/{page}/{size}")
-    public List<Book> findPaginated(@PathVariable("page") final int page, @PathVariable("size") final int size) {
-        logger.debug("Start: GET page, size: {}, {}", page, size);
-        Pageable pageable = PageRequest.of(page, size);
+    @GetMapping(name = "/pages/", path = "pageable")
+    public Page<Book> findPaginated(final Pageable pageable) {
+        logger.debug("Start: GET pages {}", pageable);
         Page<Book> resultPage = repository.findAll(pageable);
-        logger.debug("End: GET page, size: {}, {}, elements: {}", page, size, resultPage.getTotalElements());
-        return resultPage.getContent();
+        logger.debug("End: GET pages {}, elements: {}", pageable, resultPage.getTotalElements());
+        return resultPage;
     }
 
 }

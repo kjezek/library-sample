@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
  * This is a spring boot main class.
  */
 @SpringBootApplication
-@Import({LibraryConfig.class, SwaggerConfig.class})
+@Import({LibraryConfig.class})
 public class App {
 
     public static void main(String[] args) {
