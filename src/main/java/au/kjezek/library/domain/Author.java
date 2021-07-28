@@ -1,5 +1,6 @@
 package au.kjezek.library.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 @Document
 public class Author {
 
